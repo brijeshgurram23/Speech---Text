@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Speech Detection</title>
+  <link rel="icon" href="https://fav.farm/📝" />
+</head>
+<body>
+
+  <div class="words" contenteditable>
+  </div>
+
+<script>
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+  recognition.addEventListener('result', e => {
+    const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('');
+
+    let modifiedTranscript = transcript;
+
+    modifiedTranscript = modifiedTranscript.replace(/poop|poo|shit|apple user|apple users|dump/gi, '💩');
+    modifiedTranscript = modifiedTranscript.replace(/chutiya|bhenchod|lavdya|lauda|lavda|madarchod|lavdi|aai zhavadya|pucchichya|pucchi chya|chinal chya|chhinaal|chinnal/gi, 'Gaali kyu dera be chinnal..');
+    modifiedTranscript = modifiedTranscript.replace(/anime is cartoon/gi, 'Abe Lavde apna kaam kar na !');
+    modifiedTranscript = modifiedTranscript.replace(/who is salunkhe|who is salunke/gi, 'ahe ek chinal cha!');
+    modifiedTranscript = modifiedTranscript.replace(/who is pantoji/gi, 'Ghetla ka randa chya cha naav, Hasu nako daata band kar aata');
+    modifiedTranscript = modifiedTranscript.replace(/who is Sanket/gi, 'The one and only SARKAAR !');
+    modifiedTranscript = modifiedTranscript.replace(/who is venkatesh/gi, 'Gup bas re tyala taap ali 🤣');
+    modifiedTranscript = modifiedTranscript.replace(/who is kedar/gi, 'Raand ahe Raand, piush cha aashiq !');
+    modifiedTranscript = modifiedTranscript.replace(/who is aru/gi, 'Washim cha raja');
+    modifiedTranscript = modifiedTranscript.replace(/who is piyush/gi, 'kedar ka aashiq');
+    modifiedTranscript = modifiedTranscript.replace(/who is aditya pawar/gi, 'Meetha ');
+    modifiedTranscript = modifiedTranscript.replace(/who is pahalvan|who is phalvan/gi, 'Sanket Mane');
+    modifiedTranscript = modifiedTranscript.replace(/who is Sanket/gi, 'The one and only SARKAAR !');
+    modifiedTranscript = modifiedTranscript.replace(/who is basavaraj/gi, 'Future Adhaar card maker !');
+    modifiedTranscript = modifiedTranscript.replace(/who is babu/gi, 'Commander of Army!');
+    modifiedTranscript = modifiedTranscript.replace(/where is salunkhe|where is salunke/gi, 'Disla tar mala pan sang bhau');
+    modifiedTranscript = modifiedTranscript.replace(/requirements for full stack development/gi, 'Frontend: CSS, HTML5 and Ajax, JavaScript, Angular, React, TypeScript, etc. Backend: Python, PHP, NodeJS, ExpressJS, GO, Django, Middleware, etc. Database: Postgres, MySQL, MongoDB, SQLite, Clusters etc. Mobile Apps: iOS and Android. DevOps: CI/CD pipelines, Software Development Life Cycle (SDLC) creation');
+    modifiedTranscript = modifiedTranscript.replace(/how are you|how r u/gi, 'I am fine, how are you?');
+    modifiedTranscript = modifiedTranscript.replace(/who is prathamesh|who is prathmesh/gi, 'Tirki nazar wala');
+
+
+    p.textContent = modifiedTranscript;
+
+    if (modifiedTranscript.includes('ahe ek chinal cha!')) {
+        setTimeout(() => {
+            p.textContent = "bagheera";
+            p = document.createElement('p');
+            words.appendChild(p);
+        }, 2000);
+      }
+    if (e.results[0].isFinal) {
+      p = document.createElement('p');
+      words.appendChild(p);
+    }
+  });
+
+  recognition.addEventListener('end', recognition.start);
+
+  recognition.start();
+
+</script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: #1f99f6;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+    }
+
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #ebe0e0;
+    }
+  </style>
+
+</body>
+</html>
